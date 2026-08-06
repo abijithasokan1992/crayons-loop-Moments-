@@ -1,11 +1,38 @@
-<div align="center">
+# Crayons Loop Moments
 
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
+Crayons Loop Moments is the short-form and moments experience within the Crayons Loop streaming ecosystem.
 
-  <h1>Built with AI Studio</h2>
+## Production domains
 
-  <p>The fastest path from prompt to production with Gemini.</p>
+- Main streaming platform: `https://crayonsloop.com`
+- Canonical main host: `https://www.crayonsloop.com`
+- Moments application: `https://moments.crayonsloop.com`
 
-  <a href="https://aistudio.google.com/apps">Start building</a>
+## Product separation
 
-</div>
+### Crayons Loop
+
+Public VOD streaming platform supporting:
+
+- AVOD
+- SVOD
+- TVOD
+- Web
+- Mobile
+- OTT / Connected TV
+
+### Crayons Loop Moments
+
+A separately deployed application for short-form clips, highlights, promotional moments, discovery feeds and shareable video experiences.
+
+## Repository responsibility
+
+This repository is reserved for the Moments application only. The main Crayons Loop streaming platform must remain in a separate repository and deployment project.
+
+## Domain routing target
+
+`moments.crayonsloop.com` must point only to the deployment generated from this repository. It must not redirect to or overwrite the main `crayonsloop.com` application.
+
+## Launch gate
+
+Production launch requires valid SSL, DNS resolution, HTTPS redirects and a successful application health check.
