@@ -1,0 +1,30 @@
+openapi: 3.1.0
+info:
+  title: Crayons Loop Platform API
+  version: 0.1.0
+paths:
+  /health:
+    get:
+      responses:
+        '200': {description: Healthy}
+  /v1/moments/events:
+    get:
+      responses:
+        '200': {description: List studio events}
+    post:
+      responses:
+        '201': {description: Create event}
+  /v1/ott/titles:
+    get:
+      responses:
+        '200': {description: List published OTT titles}
+  /v1/playback/{resourceId}:
+    get:
+      parameters:
+        - in: path
+          name: resourceId
+          required: true
+          schema: {type: string}
+      responses:
+        '200': {description: Return signed playback entitlement}
+        '403': {description: Access denied}

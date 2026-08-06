@@ -1,0 +1,1 @@
+export default function Home(){return <main><h1>Crayons Loop Moments</h1><p>Private wedding and event video streaming for studios, clients and families.</p><a href="/studio">Open Studio Dashboard</a></main>}
