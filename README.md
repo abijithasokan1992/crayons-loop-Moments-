@@ -5,7 +5,34 @@ Crayons Loop Moments is a private event-video streaming platform for wedding stu
 ## Production domain
 
 - Moments application: `https://moments.crayonsloop.com`
-- Main Crayons Loop VOD platform: `https://www.crayonsloop.com`
+- Main Crayons Loop platform: `https://www.crayonsloop.com`
+
+## Brand architecture
+
+### Crayons Loop
+
+Crayons Loop is positioned as a premium consumer OTT entertainment platform in the Netflix / Amazon Prime Video category.
+
+Core platform scope:
+
+- Films
+- Series
+- Documentaries
+- Kids and family content
+- Regional and multilingual catalogues
+- Originals and exclusives
+- SVOD subscriptions
+- TVOD rentals and purchases
+- AVOD free-with-ads viewing
+- Web, mobile and connected-TV applications
+- Personal profiles, watchlists and continue-watching
+- Search, recommendations and curated collections
+
+Crayons Loop is not positioned as a creator-upload portal or private-event delivery service. It is the main public entertainment destination for viewers.
+
+### Crayons Loop Moments
+
+Crayons Loop Moments is a separate B2B2C product for studios to deliver private wedding and function videos to their clients and invited families.
 
 ## Core purpose
 
@@ -82,7 +109,7 @@ Supported event types include:
 
 This repository is reserved only for Crayons Loop Moments.
 
-The public AVOD, SVOD and TVOD entertainment platform at `www.crayonsloop.com` must remain in a separate repository and deployment.
+The Netflix / Amazon Prime Video-style public entertainment platform at `www.crayonsloop.com` must remain in a separate repository, deployment and data boundary.
 
 ## Domain routing
 
