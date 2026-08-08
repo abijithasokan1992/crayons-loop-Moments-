@@ -39,15 +39,22 @@ Expected production artifacts:
 | `moments.crayonsloop.com` | `apps/moments-web` |
 | `admin.crayonsloop.com` | `apps/admin-cms` |
 
-The GitHub deployment workflow expects these production credentials/settings:
+The deployment workflow requires only two production GitHub secrets:
 
-- secret `CLOUDFLARE_ACCOUNT_ID`
-- secret `CLOUDFLARE_API_TOKEN`
-- variable `CLOUDFLARE_OTT_PROJECT`
-- variable `CLOUDFLARE_MOMENTS_PROJECT`
-- variable `CLOUDFLARE_ADMIN_PROJECT`
+- `CLOUDFLARE_ACCOUNT_ID`
+- `CLOUDFLARE_API_TOKEN`
 
-It fails before deployment when any required value is missing.
+The token must be able to read/write Cloudflare Pages resources. The workflow then:
+
+1. verifies the token;
+2. inventories Pages projects and reuses the project already attached to each Crayons Loop domain when one exists;
+3. falls back to canonical project names only when no matching project exists;
+4. deploys OTT, Moments and Admin production exports;
+5. associates the apex, `www`, `moments` and `admin` custom domains;
+6. waits for Cloudflare custom-domain TLS to become active;
+7. requires all three `healthz.txt` endpoints to return `ok`.
+
+It fails closed at the exact blocked stage rather than claiming production readiness.
 
 ## Architecture boundary
 
