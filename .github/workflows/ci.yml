@@ -1,18 +1,66 @@
 name: CI
+
 on:
   push:
     branches: [main]
   pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: crayons-loop-ci-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
-  validate:
+  production-build:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
-        with: {version: 9}
-      - uses: actions/setup-node@v4
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9.15.0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: pnpm
-      - run: pnpm install --no-frozen-lockfile
-      - run: pnpm build
+
+      - name: Install dependencies
+        run: pnpm install --no-frozen-lockfile
+
+      - name: Build all surfaces
+        run: pnpm build
+
+      - name: Verify production exports
+        shell: bash
+        run: |
+          set -euo pipefail
+          for app in ott-web moments-web admin-cms; do
+            test -f "apps/$app/out/index.html"
+            test -f "apps/$app/out/healthz.txt"
+            test -f "apps/$app/out/_headers"
+            grep -qx "ok" "apps/$app/out/healthz.txt"
+          done
+
+      - name: Upload OTT artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: crayons-loop-ott
+          path: apps/ott-web/out
+
+      - name: Upload Moments artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: crayons-loop-moments
+          path: apps/moments-web/out
+
+      - name: Upload Admin artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: crayons-loop-admin
+          path: apps/admin-cms/out
