@@ -1,0 +1,101 @@
+openapi: 3.0.3
+info:
+  title: Crayons Loop Studio Internal API
+  version: 0.1.0
+  description: Internal content factory, publishing, analytics and growth backend.
+servers:
+  - url: /api/loop-studio
+paths:
+  /health:
+    get:
+      operationId: health
+      responses:
+        '200':
+          description: Healthy
+  /projects:
+    post:
+      operationId: createProject
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProjectCreate'
+      responses:
+        '201': {description: Created}
+    get:
+      operationId: listProjects
+      responses:
+        '200': {description: Project list}
+  /projects/{projectId}/jobs:
+    post:
+      operationId: createJob
+      parameters:
+        - {$ref: '#/components/parameters/ProjectId'}
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '#/components/schemas/JobCreate'}
+      responses:
+        '202': {description: Queued}
+  /projects/{projectId}/qa:
+    get:
+      operationId: getQa
+      parameters:
+        - {$ref: '#/components/parameters/ProjectId'}
+      responses:
+        '200': {description: QA status}
+  /projects/{projectId}/publish:
+    post:
+      operationId: publish
+      parameters:
+        - {$ref: '#/components/parameters/ProjectId'}
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '#/components/schemas/PublishRequest'}
+      responses:
+        '202': {description: Publishing queued}
+  /projects/{projectId}/analytics:
+    get:
+      operationId: analytics
+      parameters:
+        - {$ref: '#/components/parameters/ProjectId'}
+      responses:
+        '200': {description: Analytics}
+  /projects/{projectId}/growth-actions:
+    get:
+      operationId: growthActions
+      parameters:
+        - {$ref: '#/components/parameters/ProjectId'}
+      responses:
+        '200': {description: Growth recommendations}
+components:
+  parameters:
+    ProjectId:
+      name: projectId
+      in: path
+      required: true
+      schema: {type: string, format: uuid}
+  schemas:
+    ProjectCreate:
+      type: object
+      required: [name, mode]
+      properties:
+        name: {type: string}
+        mode: {type: string, enum: [creator, studio]}
+        brief: {type: object}
+    JobCreate:
+      type: object
+      required: [type]
+      properties:
+        type: {type: string}
+        input: {type: object}
+    PublishRequest:
+      type: object
+      required: [platform]
+      properties:
+        platform: {type: string, enum: [youtube, facebook, instagram]}
+        metadata: {type: object}
