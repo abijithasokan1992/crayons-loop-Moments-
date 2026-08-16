@@ -1,0 +1,27 @@
+{
+  "version": "0.1",
+  "policy": {
+    "mandatory_paid_provider": false,
+    "automatic_paid_fallback": false,
+    "quota_bypass": false,
+    "local_open_source_preferred": true,
+    "official_platform_apis_only": true
+  },
+  "capabilities": [
+    {"id":"content.script.generate","category":"creative","provider":"ollama","lifecycle_state":"catalogued"},
+    {"id":"content.storyboard.generate","category":"creative","provider":"ollama","lifecycle_state":"catalogued"},
+    {"id":"media.video.generate","category":"video","provider":"local-open-model","lifecycle_state":"catalogued"},
+    {"id":"media.video.transform","category":"video","provider":"ffmpeg","lifecycle_state":"catalogued"},
+    {"id":"audio.transcribe","category":"audio","provider":"whisper","lifecycle_state":"catalogued"},
+    {"id":"audio.tts","category":"audio","provider":"piper","lifecycle_state":"catalogued"},
+    {"id":"audio.cleanup","category":"audio","provider":"ffmpeg","lifecycle_state":"catalogued"},
+    {"id":"audio.mix","category":"audio","provider":"ffmpeg","lifecycle_state":"catalogued"},
+    {"id":"subtitle.generate","category":"accessibility","provider":"whisper","lifecycle_state":"catalogued"},
+    {"id":"thumbnail.generate","category":"creative","provider":"local-open-model","lifecycle_state":"catalogued"},
+    {"id":"metadata.generate","category":"publishing","provider":"ollama","lifecycle_state":"catalogued"},
+    {"id":"publish.youtube","category":"distribution","provider":"youtube-official-api","lifecycle_state":"catalogued"},
+    {"id":"publish.meta","category":"distribution","provider":"meta-official-api","lifecycle_state":"catalogued"},
+    {"id":"analytics.youtube","category":"analytics","provider":"youtube-official-api","lifecycle_state":"catalogued"},
+    {"id":"growth.recommend","category":"growth","provider":"ollama","lifecycle_state":"catalogued"}
+  ]
+}
